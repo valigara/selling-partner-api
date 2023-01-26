@@ -320,30 +320,10 @@ class OrderItem implements ModelInterface, ArrayAccess, \JsonSerializable
     public function getModelName()
     {
         return self::$openAPIModelName;
-    }const DEEMED_RESELLER_CATEGORY_IOSS = 'IOSS';
-    const DEEMED_RESELLER_CATEGORY_UOSS = 'UOSS';
-    const DEEMED_RESELLER_CATEGORY_GB_VOEC = 'GB_VOEC';
-    const DEEMED_RESELLER_CATEGORY_NO_VOEC = 'NO_VOEC';
-    const DEEMED_RESELLER_CATEGORY_CA_MPF = 'CA_MPF';
+    }
     
     
 
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getDeemedResellerCategoryAllowableValues()
-    {
-        return [
-            self::DEEMED_RESELLER_CATEGORY_IOSS,
-            self::DEEMED_RESELLER_CATEGORY_UOSS,
-            self::DEEMED_RESELLER_CATEGORY_GB_VOEC,
-            self::DEEMED_RESELLER_CATEGORY_NO_VOEC,
-            self::DEEMED_RESELLER_CATEGORY_CA_MPF,
-        ];
-    }
-    
     /**
      * Associative array for storing property values
      *
@@ -411,14 +391,6 @@ class OrderItem implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['quantity_ordered'] === null) {
             $invalidProperties[] = "'quantity_ordered' can't be null";
-        }
-        $allowedValues = $this->getDeemedResellerCategoryAllowableValues();
-        if (!is_null($this->container['deemed_reseller_category']) && !in_array($this->container['deemed_reseller_category'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'deemed_reseller_category', must be one of '%s'",
-                $this->container['deemed_reseller_category'],
-                implode("', '", $allowedValues)
-            );
         }
 
         return $invalidProperties;
@@ -1168,16 +1140,6 @@ class OrderItem implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function setDeemedResellerCategory($deemed_reseller_category)
     {
-        $allowedValues = $this->getDeemedResellerCategoryAllowableValues();
-        if (!is_null($deemed_reseller_category) && !in_array($deemed_reseller_category, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'deemed_reseller_category', must be one of '%s'",
-                    $deemed_reseller_category,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
         $this->container['deemed_reseller_category'] = $deemed_reseller_category;
 
         return $this;
