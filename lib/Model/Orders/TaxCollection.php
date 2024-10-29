@@ -216,6 +216,9 @@ class TaxCollection implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->container['model'] = $data['model'] ?? null;
         $this->container['responsible_party'] = $data['responsible_party'] ?? null;
+        if($this->container['responsible_party'] === '') {
+            $this->container['responsible_party'] = null;
+        }
     }
 
     /**
@@ -313,6 +316,9 @@ class TaxCollection implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setResponsibleParty($responsible_party)
     {
         $allowedValues = $this->getResponsiblePartyAllowableValues();
+        if($responsible_party === '') {
+            $responsible_party = null;
+        }
         if (!is_null($responsible_party) && !in_array($responsible_party, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
